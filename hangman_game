@@ -1,0 +1,92 @@
+import random
+
+word = ["سیب", "موز", "پرتقال", "انگور", "هلو", "زردآلو", "گیلاس", "آلبالو", "انار", "خرمالو",
+        "نارنگی", "لیمو", "آناناس", "انبه", "پرتغال", "نارنج", "تمشک", "توت‌", "بلوبری", "کیوی"]
+
+chosen_word = random.choice(word)
+
+lives = 6
+stages = [
+    """
+    ------
+    |    |
+    |    O
+    |   /|\\
+    |   / \\
+    |
+    """,
+    """
+    ------
+    |    |
+    |    O
+    |   /|\\
+    |   /
+    |
+    """,
+    """
+    ------
+    |    |
+    |    O
+    |   /|\\
+    |
+    |
+    """,
+    """
+    ------
+    |    |
+    |    O
+    |   /|
+    |
+    |
+    """,
+    """
+    ------
+    |    |
+    |    O
+    |    |
+    |
+    |
+    """,
+    """
+    ------
+    |    |
+    |    O
+    |
+    |
+    |
+    """,
+    """
+    ------
+    |    |
+    |
+    |
+    |
+    |
+    """
+]
+
+display = ["_"] * len(chosen_word)
+end_of_game = False
+
+print("به بازی دارت خوش آمدید! یک میوه را حدس بزنید.")
+
+while not end_of_game:
+    print(f"جان های باقی مانده:{lives} ")
+    print(f"{' '.join(display)}\n")
+
+    guess = input("یک حرف وارد کنید: ").strip()
+
+    if guess in chosen_word:
+        for position in range(len(chosen_word)):
+            if chosen_word[position] == guess:
+                display[position] = guess
+    else:
+        lives -= 1
+        print(stages[6 - lives])
+    if lives == 0:
+
+        print(f"متاسفانه باختید! کلمه: {chosen_word}")
+        break
+    elif "_" not in display:
+        print(f"تبریک! کلمه:  {chosen_word}")
+        break
